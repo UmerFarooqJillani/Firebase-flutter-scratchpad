@@ -2,7 +2,7 @@
 
 ## Repo Structure
 ```dart
-flutter-firebase-learning-lab/
+firebase-scratchpad/
 │
 ├── README.md
 ├── pubspec.yaml
