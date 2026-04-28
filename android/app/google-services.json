@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "92967198669",
+    "project_id": "firbase-scratchpad",
+    "storage_bucket": "firbase-scratchpad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92967198669:android:6ea67af24550e1b7c7ae84",
+        "android_client_info": {
+          "package_name": "com.example.firebase_scratchpad"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCI7-dQylI4eoMARaN2Bad1yeqvRNjTbk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
