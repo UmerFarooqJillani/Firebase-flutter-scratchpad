@@ -1,7 +1,15 @@
+import 'package:firebase_scratchpad/services/firebase/firebase_initializer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // reads firebase_options.dart
+  // connects to correct Firebase project
+  // starts native Firebase SDK
+  await FirebaseInitializer.initialize();
+
   runApp(ProviderScope(child: const MyApp()));
 }
 
