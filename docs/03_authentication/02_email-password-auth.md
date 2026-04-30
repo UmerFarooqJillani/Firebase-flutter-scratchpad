@@ -22,7 +22,7 @@ File contain these methods:
     ```
 - inside every screen, Riverpod provides it cleanly.
 ```dart
-// lib\features\authentication\application\auth_providers.dart
+// lib\features\authentication\email_password_auth\application\auth_providers.dart
 
 File contain these Providers:
 --> firebaseAuthProvider
@@ -43,7 +43,7 @@ File contain these Providers:
     - map Firebase exceptions
     - handle account linking
 ```dart
-// lib\features\authentication\data\auth_repository.dart
+// lib\features\authentication\email_password_auth\data\auth_repository.dart
 This class does not directly use FirebaseAuth.instance.
 Instead, it uses FirebaseAuthService.
 File contain these methods:
@@ -55,7 +55,7 @@ File contain these methods:
 
 ## Auth State
 ```dart
-// lib\features\authentication\application\auth_state.dart
+// lib\features\authentication\email_password_auth\application\auth_state.dart
 ```
 
 ## Auth Controller
@@ -66,11 +66,11 @@ File contain these methods:
     - calling repository
     - exposing state to UI
 ```dart
-// lib\features\authentication\application\auth_controller.dart
+// lib\features\authentication\email_password_auth\application\auth_controller.dart
 ```
 
 ## Email signup screen
 ```dart
-// lib\features\authentication\presentation\signup_screen.dart
+// lib\features\authentication\email_password_auth\presentation\signup_screen.dart
 ```
 --- 
