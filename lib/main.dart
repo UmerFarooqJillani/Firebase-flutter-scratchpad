@@ -1,3 +1,4 @@
+import 'package:firebase_scratchpad/features/authentication/presentation/signup_screen.dart';
 import 'package:firebase_scratchpad/services/firebase/firebase_initializer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: Scaffold(body: Center(child: Text("data"))),
+      // home: Scaffold(body: Center(child: Text("data"))),
+      home: SignupScreen(),
     );
   }
 }
