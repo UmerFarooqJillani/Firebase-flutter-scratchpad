@@ -220,3 +220,15 @@ Before real OTP in production:
 - Attempt limit added in UI
 
 --- 
+
+## iOS notes
+- Must enable phone auth in Firebase console
+- Add real device for testing
+- OTP auto-fill suggestion works via iOS keyboard
+
+## Android notes
+- Add SHA-1 in Firebase Console
+- Supports auto-verification
+- Use real device for best testing
+
+--- 
