@@ -110,7 +110,7 @@ Firestore
     ```
 7. Repository Layer
     ```dart
-    // lib\features\firestore_learning\data\firestore_repository.dart
+    // lib\features\firestore_learning\crud\data\firestore_repository.dart
 
     // Why Repository?
         // Current app:
@@ -125,7 +125,7 @@ Firestore
     ```
 8. Riverpod Providers
     ```dart
-    // lib\features\firestore_learning\application\firestore_provider.dart
+    // lib\features\firestore_learning\crud\application\firestore_provider.dart
 
     // Providers Includes:
         Firebase Provider
@@ -149,7 +149,7 @@ Firestore
     ```
 9. User Interface (UI)
     ```dart
-    // lib\features\firestore_learning\presentation\firestore_crud_screen.dart
+    // lib\features\firestore_learning\crud\presentation\firestore_crud_screen.dart
     ```
 
 --- 
