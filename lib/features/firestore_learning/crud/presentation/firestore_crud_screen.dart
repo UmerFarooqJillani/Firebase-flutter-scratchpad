@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:firebase_scratchpad/models/user_profile.dart';
-import 'package:firebase_scratchpad/features/firestore_learning/application/firestore_provider.dart';
+import 'package:firebase_scratchpad/features/firestore_learning/crud/application/firestore_provider.dart';
 
 class FirestoreCrudScreen extends ConsumerStatefulWidget {
   const FirestoreCrudScreen({super.key});
