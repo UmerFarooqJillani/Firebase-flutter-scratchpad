@@ -37,4 +37,9 @@ class FirestoreRepository {
   Future<void> deleteUser(String uid) {
     return service.deleteUser(uid);
   }
+
+  // Streaming
+  Stream<UserProfileModel?> watchUser(String uid) {
+    return service.watchUser(uid);
+  }
 }

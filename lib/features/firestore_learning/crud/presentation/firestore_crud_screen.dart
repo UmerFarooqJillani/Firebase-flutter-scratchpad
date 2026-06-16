@@ -1,3 +1,4 @@
+import 'package:firebase_scratchpad/features/firestore_learning/realtime_streams/presentation/realtime_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -139,7 +140,8 @@ class _FirestoreCrudScreenState extends ConsumerState<FirestoreCrudScreen> {
                     children: [
                       Text('ID: ${loadedUser!.id}'),
 
-                      Text('Name: ${loadedUser!.name}'),
+                      Text('Name: ${loadedUser!.name} (Future Fetch)'),
+                      RealtimeUserScreen(uid: loadedUser!.id),
 
                       Text('Email: ${loadedUser!.email}'),
                     ],

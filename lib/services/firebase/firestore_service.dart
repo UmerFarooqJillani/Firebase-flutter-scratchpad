@@ -53,4 +53,15 @@ class FirestoreService {
   Future<void> deleteUser(String uid) async {
     await usersCollection.doc(uid).delete();
   }
+
+  // Streaming
+  Stream<UserProfileModel?> watchUser(String uid) {
+    return usersCollection.doc(uid).snapshots().map((snapshot) {
+      if (!snapshot.exists || snapshot.data() == null) {
+        return null;
+      }
+
+      return UserProfileModel.fromMap(snapshot.id, snapshot.data()!);
+    });
+  }
 }
