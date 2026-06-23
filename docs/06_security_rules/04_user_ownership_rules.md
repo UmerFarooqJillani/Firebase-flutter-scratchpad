@@ -146,6 +146,7 @@ match /users/{userId}/notes/{noteId} {
 User can access only their notes.
 Storage Ownership
 ```
+--- 
 
 ## Storage Structure:
 ```
@@ -170,5 +171,5 @@ match /users/{userId}/{fileName} {
     - Current User: `abc123`
     - Path: `users/xyz999/profile.jpg`
     - **DENY**
-    
+
 --- 
