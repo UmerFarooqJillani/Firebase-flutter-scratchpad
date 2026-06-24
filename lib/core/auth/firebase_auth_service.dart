@@ -28,7 +28,7 @@ class FirebaseAuthService {
   // This returns the current logged-in user (if any)
   // If no user is logged in → returns null
   // This is NOT a stream (just a snapshot at this moment)
-  User? get currentUser {
+  User? get currentUser {       // I recommended to use: authStateChanges()
     return _auth.currentUser;
   }
 
