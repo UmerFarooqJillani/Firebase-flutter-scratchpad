@@ -1,4 +1,4 @@
-# <p align="center"> Auth Persistence? </p>
+# <p align="center"> Auth Persistence </p>
 
 **Many beginners think:**
 ```
