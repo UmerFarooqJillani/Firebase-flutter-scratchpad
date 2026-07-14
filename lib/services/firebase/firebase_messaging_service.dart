@@ -7,8 +7,19 @@ class FirebaseMessagingService {
   Future<String?> init() async {
     await _messaging.requestPermission();
 
-    final token = await _messaging.getToken();  // ask permission for iOS/Web
+    final token = await _messaging.getToken(); // ask permission for iOS/Web
     debugPrint("✅ FCM Token: $token");
     return token;
+  }
+
+  // Notification Permission Service
+  Future<bool> requestPermission() async {
+    NotificationSettings settings = await _messaging.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+
+    return settings.authorizationStatus == AuthorizationStatus.authorized;
   }
 }

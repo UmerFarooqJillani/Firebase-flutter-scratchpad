@@ -30,12 +30,13 @@ Is this production-friendly?
 
 */
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:firebase_scratchpad/core/providers/fcm_provider.dart';
 import 'package:firebase_scratchpad/services/firebase/firebase_messaging_service.dart';
+import 'package:firebase_scratchpad/features/notification/application/permission_provider.dart';
+import 'package:firebase_scratchpad/features/notification/application/notification_controller.dart';
 
 class NotificationDemoScreen extends ConsumerStatefulWidget {
   const NotificationDemoScreen({super.key});
@@ -47,34 +48,73 @@ class NotificationDemoScreen extends ConsumerStatefulWidget {
 
 class _NotificationDemoScreenState
     extends ConsumerState<NotificationDemoScreen> {
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   // Call the FCM service after first frame
+  //   WidgetsBinding.instance.addPostFrameCallback((_) async {
+  //     final token = await FirebaseMessagingService().init();
+  //     ref.read(fcmTokenProvider.notifier).state = token;
+  //   });
+  // }
+
   @override
   void initState() {
     super.initState();
 
-    // Call the FCM service after first frame
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final token = await FirebaseMessagingService().init();
-      ref.read(fcmTokenProvider.notifier).state = token;
+      final controller = PermissionController(ref, FirebaseMessagingService());
+      await controller.requestAndInitToken();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final token = ref.watch(fcmTokenProvider);
+    final isGranted = ref.watch(notificationPermissionProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('FCM Token Demo')),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Text(
-            token ?? 'Token not generated yet',
-            textAlign: TextAlign.justify,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Notification Permission: ${isGranted ? "Granted" : "Denied"}',
+                style: const TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                token ?? 'Token not generated yet',
+                textAlign: TextAlign.justify,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
+  // @override
+  // Widget build(BuildContext context) {
+  //   final token = ref.watch(fcmTokenProvider);
+
+  //   return Scaffold(
+  //     appBar: AppBar(title: const Text('FCM Token Demo')),
+  //     body: Center(
+  //       child: Padding(
+  //         padding: const EdgeInsets.all(12.0),
+  //         child: Text(
+  //           token ?? 'Token not generated yet',
+  //           textAlign: TextAlign.justify,
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 
 // -----------------------------------------------------------------
