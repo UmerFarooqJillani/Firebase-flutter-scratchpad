@@ -39,6 +39,10 @@ dependencies:
   firebase_auth: ^6.5.1
   firebase_app_check: ^0.4.4+2
   cloud_firestore: ^6.5.0
+  # For Notifications
+  firebase_messaging: ^16.4.1
+  flutter_local_notifications: ^22.0.1
+  
 
 dev_dependencies:
   flutter_test:
