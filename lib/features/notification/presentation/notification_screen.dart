@@ -31,6 +31,7 @@ Is this production-friendly?
 */
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -56,6 +57,17 @@ class _NotificationDemoScreenState
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       try {
+        // Get FCM initial message
+        final initialMessage = await FirebaseMessaging.instance
+            .getInitialMessage();
+        if (initialMessage != null) {
+          ref.read(initialMessageProvider.notifier).state = initialMessage;
+          ref
+              .read(notificationListProvider.notifier)
+              .addNotification(initialMessage);
+        }
+
+        // Current user check
         final user = FirebaseAuth.instance.currentUser;
         final userId = user?.uid;
 
@@ -89,6 +101,9 @@ class _NotificationDemoScreenState
     final token = ref.watch(fcmTokenProvider);
     final isGranted = ref.watch(notificationPermissionProvider);
 
+    final initialMessage = ref.watch(initialMessageProvider);
+    final notifications = ref.watch(notificationListProvider);
+
     return Scaffold(
       appBar: AppBar(title: const Text('FCM Token Demo')),
       body: Center(
@@ -107,6 +122,28 @@ class _NotificationDemoScreenState
                 textAlign: TextAlign.justify,
                 style: const TextStyle(fontSize: 16),
               ),
+              // -----------------------------
+              const SizedBox(height: 20),
+              if (initialMessage != null)
+                Text(
+                  'Initial Message:\n${initialMessage.notification?.title ?? "No Title"}',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16),
+                ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: notifications.length,
+                  itemBuilder: (context, index) {
+                    final message = notifications[index];
+                    return ListTile(
+                      title: Text(message.notification?.title ?? 'No Title'),
+                      subtitle: Text(message.notification?.body ?? ''),
+                    );
+                  },
+                ),
+              ),
+              // ------------------------------
             ],
           ),
         ),

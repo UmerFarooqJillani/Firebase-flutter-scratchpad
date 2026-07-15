@@ -6,6 +6,10 @@ final fcmTokenProvider = StateProvider<String?>(
   (ref) => null,
 ); // Stores current FCM token in state.
 
+final initialMessageProvider =
+    StateProvider //Use StateProvider because only one screen is active.
+    <RemoteMessage?>((ref) => null); // Init Messages
+
 final notificationListProvider =
     StateNotifierProvider<NotificationListNotifier, List<RemoteMessage>>(
       (ref) => NotificationListNotifier(),
