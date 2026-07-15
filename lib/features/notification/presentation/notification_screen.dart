@@ -106,46 +106,47 @@ class _NotificationDemoScreenState
 
     return Scaffold(
       appBar: AppBar(title: const Text('FCM Token Demo')),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Notification Permission: ${isGranted ? "Granted" : "Denied"}',
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              token ?? 'Token not generated yet',
+              textAlign: TextAlign.justify,
+              style: const TextStyle(fontSize: 16),
+            ),
+            // -----------------------------
+            const SizedBox(height: 20),
+            if (initialMessage != null)
               Text(
-                'Notification Permission: ${isGranted ? "Granted" : "Denied"}',
-                style: const TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                token ?? 'Token not generated yet',
-                textAlign: TextAlign.justify,
+                'Initial Message:\n${initialMessage.notification?.title ?? "No Title"}',
+                textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 16),
               ),
-              // -----------------------------
-              const SizedBox(height: 20),
-              if (initialMessage != null)
-                Text(
-                  'Initial Message:\n${initialMessage.notification?.title ?? "No Title"}',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 16),
-                ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: notifications.length,
-                  itemBuilder: (context, index) {
-                    final message = notifications[index];
-                    return ListTile(
+            const SizedBox(height: 20),
+            Expanded(
+              child: ListView.builder(
+                itemCount: notifications.length,
+                itemBuilder: (context, index) {
+                  final message = notifications[index];
+                  return Card(
+                    child: ListTile(
                       title: Text(message.notification?.title ?? 'No Title'),
                       subtitle: Text(message.notification?.body ?? ''),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
-              // ------------------------------
-            ],
-          ),
+            ),
+            // ------------------------------
+          ],
         ),
       ),
     );
