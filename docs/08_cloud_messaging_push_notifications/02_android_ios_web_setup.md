@@ -82,7 +82,7 @@
     ```
 6. Riverpod integration (important)
     - We convert messaging into state.
-    - **Create provider:** `lib\core\providers\fcm_provider.dart`
+    - **Create provider:** `lib\features\notification\application\providers.dart`
         ```
         // FCM Token Provider
         ```
