@@ -62,3 +62,4 @@
             - If a refresh happens, the old token in the provider is replaced with the new one automatically. This is expected behavior.
     ```
     > You are not replacing the old token unnecessarily, you’re just making sure both current and future tokens are saved. Production apps need this to ensure notifications always reach the device.
+--- 
