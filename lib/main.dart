@@ -5,7 +5,8 @@ import 'package:firebase_scratchpad/services/firebase/firebase_initializer.dart'
 // import 'package:firebase_scratchpad/features/authentication/email_password_auth/presentation/signup_screen.dart';
 // import 'package:firebase_scratchpad/features/authentication/phone_otp_auth/presentation/phone_login_screen.dart';
 // import 'package:firebase_scratchpad/features/firestore_learning/crud/presentation/firestore_crud_screen.dart';
-import 'package:firebase_scratchpad/features/notification/presentation/notification_screen.dart';
+// import 'package:firebase_scratchpad/features/notification/presentation/notification_screen.dart';
+import 'package:firebase_scratchpad/features/analytics_crashlytics/presentation/analytics_demo_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
       // home: SignupScreen(),
       // home: PhoneLoginScreen(),
       // home: FirestoreCrudScreen(),
-      home: NotificationDemoScreen(),
+      // home: NotificationDemoScreen(),
+      home: AnalyticsDemoScreen(),
     );
   }
 }
