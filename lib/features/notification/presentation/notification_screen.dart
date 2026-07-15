@@ -35,6 +35,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:firebase_scratchpad/features/notification/application/providers.dart';
+import 'package:firebase_scratchpad/services/firebase/firebase_messaging_service.dart';
 import 'package:firebase_scratchpad/features/notification/application/notification_controller.dart';
 
 class NotificationDemoScreen extends ConsumerStatefulWidget {
@@ -47,16 +48,7 @@ class NotificationDemoScreen extends ConsumerStatefulWidget {
 
 class _NotificationDemoScreenState
     extends ConsumerState<NotificationDemoScreen> {
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   // Call the FCM service after first frame
-  //   WidgetsBinding.instance.addPostFrameCallback((_) async {
-  //     final token = await FirebaseMessagingService().init();
-  //     ref.read(fcmTokenProvider.notifier).state = token;
-  //   });
-  // }
+  final _fcmService = FirebaseMessagingService();
 
   @override
   void initState() {
@@ -68,12 +60,19 @@ class _NotificationDemoScreenState
         final userId = user?.uid;
 
         if (userId != null) {
-          // Get your controller from Riverpod
-          final controller = ref.read(permissionControllerProvider);
-
-          // Pass the userId to your method
-          await controller.requestAndInitToken(userId);
+          final controller = ref.read(
+            permissionControllerProvider,
+          ); // Get your controller from Riverpod
+          await controller.requestAndInitToken(
+            userId,
+          ); // Pass the userId to your method
           debugPrint('✅ User logged in. Initialize FCM token.');
+
+          // Setup foreground listener
+          _fcmService.setupForegroundListener(ref);
+
+          // Setup background listener (once at app start)
+          _fcmService.setupBackgroundHandler();
         } else {
           // Handle case when user is not logged in yet
           debugPrint('❌ User not logged in. Cannot initialize FCM token.');
