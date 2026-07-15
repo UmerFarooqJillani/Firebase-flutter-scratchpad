@@ -30,12 +30,11 @@ Is this production-friendly?
 
 */
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:firebase_scratchpad/core/providers/fcm_provider.dart';
-import 'package:firebase_scratchpad/services/firebase/firebase_messaging_service.dart';
-import 'package:firebase_scratchpad/features/notification/application/permission_provider.dart';
+import 'package:firebase_scratchpad/features/notification/application/providers.dart';
 import 'package:firebase_scratchpad/features/notification/application/notification_controller.dart';
 
 class NotificationDemoScreen extends ConsumerStatefulWidget {
@@ -64,8 +63,25 @@ class _NotificationDemoScreenState
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final controller = PermissionController(ref, FirebaseMessagingService());
-      await controller.requestAndInitToken();
+      try {
+        final user = FirebaseAuth.instance.currentUser;
+        final userId = user?.uid;
+
+        if (userId != null) {
+          // Get your controller from Riverpod
+          final controller = ref.read(permissionControllerProvider);
+
+          // Pass the userId to your method
+          await controller.requestAndInitToken(userId);
+          debugPrint('✅ User logged in. Initialize FCM token.');
+        } else {
+          // Handle case when user is not logged in yet
+          debugPrint('❌ User not logged in. Cannot initialize FCM token.');
+        }
+      } catch (e, stack) {
+        debugPrint('❌ Error initializing FCM token: $e');
+        debugPrint('❌ ${stack.toString()}');
+      }
     });
   }
 

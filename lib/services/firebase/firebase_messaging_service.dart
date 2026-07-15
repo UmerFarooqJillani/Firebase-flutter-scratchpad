@@ -22,4 +22,18 @@ class FirebaseMessagingService {
 
     return settings.authorizationStatus == AuthorizationStatus.authorized;
   }
+
+  // Flow: Token changes → onTokenRefresh emits → your listener executes onUpdate(newToken)
+  void listenForTokenRefresh(void Function(String newToken) onUpdate) {
+    // Tokens can change due to:
+    // - App reinstall
+    // - OS reset
+    // - Token expiry
+    FirebaseMessaging
+        .instance
+        .onTokenRefresh // a stream that emits a new FCM token whenever it changes.
+        .listen(onUpdate);
+    // listen(...) subscribes to the stream so your code runs every time a new token is issued.
+    // onUpdate is a callback you provide to update Riverpod state or backend storage.
+  }
 }
